@@ -1,0 +1,347 @@
+@import "reset";
+@import "_variables";
+
+* {
+   box-sizing: border-box;
+}
+
+@keyframes scrollText{
+    0% {
+      transform: translateX(-50px);
+    }
+  
+    50% {
+      transform: translateX(100px);
+    }
+  
+    100% {
+      transform: translateX(-50px);
+    }
+  }
+
+  @keyframes float{
+
+    0% {
+transform: translateY(2px);
+box-shadow: 0 13px 27px -5px rgba(50,50,93,.25), 
+0 8px 16px -8px rgba(0,0,0,.3), 
+0 -6px 16px -6px rgba(0,0,0,.025); 
+}
+
+    50% {
+transform: translateY(-2px);
+box-shadow: 0 13px 27px -125px rgba(50,50,93,.25), 
+0 8px 16px -8px rgba(0,0,0,.3), 
+0 -6px 16px -6px rgba(0,0,0,.025); 
+}
+
+    100% {
+transform:translateY(2px);
+box-shadow: 0 13px 27px -80px rgba(50,50,93,.25), 
+0 8px 16px -8px rgba(0,0,0,.3), 
+0 -6px 16px -6px rgba(0,0,0,.025); 
+}
+
+}
+
+body{
+
+  height: 100vh;
+  font-family: Georgia, "Malgun Gothic", serif;
+  background-color: $white;
+
+}
+
+header{
+
+  position: fixed;
+  top:0;
+  left:0;
+  width: 33%;
+  height:100%;
+  padding-right: 190px;
+  padding: 5vh 5vh 60px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color:black;
+
+  h1{
+    
+
+    font-size: 60px;
+    width: 50%;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+
+  }
+
+  h3,p{
+    width: 70%;
+    text-align: justify;
+  }
+
+  h3{
+    
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: 10px;
+    animation: scrollText 15s linear infinite forwards;
+    line-height: 1.2;
+
+  }
+
+  .bottom{
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 90%;
+      height:45%;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      
+    p, .info{
+      font-weight: 600;
+      font-size: 20px;
+      margin: 0 auto ;
+      text-align: center;
+    }
+
+    p {
+        width:80%;
+        height: 20%;
+        padding-top: 12px;
+        margin-bottom: 10px ;
+        color: $gray;
+        // border-radius: 90%;
+        animation: float 5s linear infinite;
+        
+    }
+
+    .info{
+
+        height: 80%;
+        width: 90%;
+        font-size: 20px;
+        border : 2px solid $gray;
+        border-radius: 10px;
+        padding: 5px;
+
+        .input{
+
+            height:20%;
+            margin: 3px 0px;
+            padding: 5px;
+            border-radius: 10px;
+
+            .input-group > span{
+              font-size: 13px;
+            }
+
+            .select {
+
+                width:70%;
+                // padding:2px;
+                margin: 0 auto;
+                height:50%;
+                font-size: 12px;
+                border-radius: 10px;
+
+                &:hover{
+                    animation: float 3s linear infinite;
+                }
+            }
+            
+        }
+
+        .order {
+            button{
+                width: 50%;
+                margin: 6px;
+                padding: 2px;
+                color: $gray;
+                letter-spacing: 1px;
+                border: 2px solid white;
+                border-radius: 10px;
+                font-weight: 300;
+                font-size: 12px;
+                &:hover{
+                    // transition background-color: white;
+                    animation: float 2s infinite linear;
+                }
+            }
+        }
+
+  }
+
+}//bottom
+
+} // header
+
+
+main{
+
+  margin-left: $fixedwidth;
+  // 왼쪽의 sidebar 를 고정시키기 위해서
+  // 이와 같이 margin-left 를 주어야 한다.
+  // sidebar 가 아니라. 이런 main bar 에 줘야 한다.
+  height: 5000vh;
+
+  
+  .dance, .video{
+
+    background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.2) 2%,
+    rgba(0,0,0,0),
+      rgba(0,0,0,0),
+      rgba(0,0,0,0),
+      rgba(0,0,0,0) 
+  ) $gray ;
+
+  /*
+이 코드를 자세히 뜯어보면
+2개의 background를 만든 것이다.
+linear-gradient가 red 의 상위에 있게 되겠지
+또한 top to bottom 을 설정했다.
+그리고 background 전체에 2%만 약간의 검정을 넣고
+나머지는 완전히 투명하게 setting 했다.
+검정색을 더 강하게 하고 싶다면
+0.2보다 더 큰 값을 넣으면 된다.
+*/
+
+    height: 100vh;
+    width: 100%;
+    display : flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+
+    
+    .dance_wrap{
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      width: 70%;
+      height: 70%;
+
+      .dance_text{
+
+        font-size: 40px;
+        margin-bottom: 70px;
+        animation: float 2s infinite linear;
+
+      }
+
+      .dance_video{
+
+        width: 100%;
+        height: 100%;
+        border: 4px solid $white;
+        border-radius: 50%;
+
+      }
+      
+    } // .dance_wrap
+
+    
+    .dance__item{
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      width: 80%;
+      height: 80%;
+
+      .dance__real__image {
+        
+        width: 70%;
+        height: 70%;
+        
+      }
+
+      .dance__real__text{
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 70%;
+        height: 70%;
+        font-size: 15px;
+        letter-spacing: 1px;
+
+        a,p{
+          text-decoration: none;
+          margin-bottom: 25px;
+        }
+
+        a{
+          animation: float 3s infinite linear;
+          border: 1px solid $gray;
+          border-radius: 90%;
+
+          padding:3px;
+        }
+
+      }
+        
+      .dance__text{
+
+        font-size: 50px;
+        color: $gray;
+        position: absolute;
+        // clip: rect(1px,1px,1px,1px);
+        transition: all 0.1s linear;
+        top: 50%;
+        left:50%;
+        transform: translate(-50%, -50%);
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        display:none;
+      }
+  
+      .dance__background{
+        width:100%;
+        height:100%;
+        background-image: url("https://images.unsplash.com/photo-1551186839-9e4a19b27812?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60");
+        background-size: cover;
+        background-position: center;
+        transition: all .3s linear;
+        cursor: pointer;
+        // overflow: hidden;
+        
+      }
+  
+      &:hover{
+
+        .dance__background{
+          filter:blur(10px);
+        }
+
+        .dance__text{
+        display:block;
+        color : $white;
+        font-size: 50px;
+        font-weight: 500;
+        // transition : font-size 5s ease-in-out;
+          
+        } // dance_text
+
+      } // hover
+      
+     } // dance__item
+
+  } // dance , video
+
+} // main

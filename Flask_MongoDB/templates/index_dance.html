@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seoul Dance Academies</title>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='reset.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <script type="text/javascript">
+
+  $(document).ready(function () {
+    $('#orders-box').html('');
+});
+
+function get_class() {
+
+// 1. 제목, 저자, 리뷰 내용을 가져옵니다.
+    let Genre = $('#Genre').val();
+    let Day = $('#Day').val();
+    let Time = $('#Time').val();
+    let District = $('#District').val();
+
+// 2. 제목, 저자, 리뷰 중 하나라도 입력하지 않았을 경우 alert를 띄웁니다.
+    if (Genre == '') {
+        alert('장르을 입력해주세요');
+        $('#Genre').focus();
+        return;
+    } else if (Day == '') {
+        alert('일자를 입력해주세요');
+        $('#Day').focus();
+        return;
+    } else if (Time == '') {
+        alert('시간을 입력해주세요');
+        $('#Time').focus();
+        return;
+    } else if (District == ''){
+        alert("구를 입력해주세요");
+        $('#District').focus();
+    }
+
+// 3. POST /reviews 에 저장을 요청합니다.
+    $.ajax({
+        type: "GET",
+        url: `/class?Genre_give=${Genre}&Day_give=${Day}&Time_give=${Time}&District_give=${District}`,
+        // 백틱 (`) 이라는 것이 중요하다
+        data: {},
+        success: function (response) {
+            if (response['result'] == 'success') {
+                
+                let classes = response['Classes'];
+
+                if ( classes.length == 0 ) {
+                    alert("조건에 해당하는 수업이 없습니다")
+                }
+
+                else { // 조건에 해당되는 애들이 있을 때 
+
+                // 기존의 내용 없애기
+                    $('#dances-box').html('');
+                // 3. 요청 성공했을 때 리뷰를 올바르게 화면에 나타내기
+
+                    for (let i = 0; i < classes.length; i++) {
+                        make_card(classes[i]['Academy_Name'], classes[i]['Class_Names'], classes[i]['Genre'], classes[i]['Day_2'],
+                        classes[i]['Time_2'], classes[i]['Link'], classes[i]['Img'], classes[i]['District'], classes[i]['Contact']);
+                    }
+                    $('#Genre').val('');
+                    $('#Day').val('');
+                    $('#Time').val('');
+                    $('#District').val('');
+                    // window.location.reload();
+
+                }
+                
+                } else {
+                    alert('리뷰를 받아오지 못했습니다');
+                }
+            }
+        })
+}
+
+
+    function make_card(Academy_Name, Class_Names, Genre, Day_2, Time_2, Link, image, District, Contact) {
+
+        let temp_html = '<section class="dance">\
+        <div class = "dance__item">\
+        <img class="dance__real__image" src="'+ image + '" alt="Card image cap">\
+        <div class="dance__real__text">\
+          <a href="'+ Link + '" class="dance-title">' + "See More" +  '</a>\
+          <p class="dance-name">'+ "Academy_Name : " + Academy_Name + '</p>\
+          <p class="dance-text comment">'+ "Class_Names : " + Class_Names + '</p>\
+          <p class="dance-day comment">'+ "Day : " + Day_2 + '</p>\
+          <p class="dance-time comment">'+ "Time : " + Time_2 + '</p>\
+          <p class="dance-district comment">'+ "District : " + District + '</p>\
+          <p class="dance-contact comment">'+ "Contact : " + Contact + '</p>\
+        </div>\
+        </div>\
+      </section>';
+
+    $('#dances-box').append(temp_html);
+
+    }
+
+
+</script>
+
+</head>
+<body>
+  <header>
+    <!-- 왼쪽의 sidebar 에 해당하는 부분
+    이 부분은 고정이 되어야 한다 -->
+    <h1>Let Me Dance</h1>
+
+    <h3>
+        An ever growing collection of Dance Classes running in Seoul
+      </h3>
+
+      
+      <div class="bottom">
+
+          <p>
+            Let's search  
+        </p>
+      
+        <div class="info">  
+
+            <div class="input">
+                <div class="input-group">
+                    <span class="input-group-text">Genre</span>
+                </div>
+                <select class = "select" id='Genre'>
+                    <option value='' selected>-- select --</option>
+                    <option value='K-Pop'>K-Pop</option>
+                    <option value='Hip-Hop'>Hip-Hop </option>
+                    <option value='Girlish'>Girlish</option>
+                    <option value='Girls-HipHop'>Girls-HipHop</option>
+                    <option value='Waacking'>Waacking</option>
+                    <option value='Poppin'>Poppin</option>
+                    <option value='Locking'>Locking</option>
+                    <option value='House'>House</option>
+                    <option value='Breaking'>Breaking</option>
+                    <option value='Ballet'>Ballet</option>
+                    <option value='Korea_Dance'>Korea_Dance</option>
+                    <option value='Modern_Dance'>Modern_Dance</option>
+                    <option value='Choreography'>Choreography</option>
+                  </select>
+
+                <!-- <input type="text" class="form" id = "Genre" aria-describedby="basic-addon3"> -->
+            </div>
+
+            <div class="input">
+                <div class="input-group">
+                    <span class="input-group-text">Day</span>
+                </div>
+                <select class = "select" id='Day'>
+                    <option value='' selected>-- select --</option>
+                    <option value='WeekDay'>WeekDay</option>
+                    <option value='Weekends'>Weekends</option>
+                  </select>
+
+
+                <!-- <input type="text" class="form" id = "Day" aria-describedby="basic-addon3"> -->
+            </div>
+
+            <div class="input">
+                <div class="input-group">
+                    <span class="input-group-text">Time</span>
+                </div>
+                <select class = "select" id='Time'>
+                    <option value='' selected>-- select --</option>
+                    <option value='Afternoon'>Afternoon( ~ 6 )</option>
+                    <option value='Night'>Night( 6 ~ )</option>
+                  </select>
+
+                <!-- <input type="text" class="form" id = "Time" aria-describedby="basic-addon3"> -->
+            
+            </div>
+            
+            <div class="input">
+                <div class="input-group">
+                    <span class="input-group-text">District</span>
+                </div>
+                <select class = "select" id='District'>
+                    <option value='' selected>-- select --</option>
+                    <option value='Mapo'>Mapo</option>
+                    <option value='Gangnam'>Gangnam</option>
+                    <option value='Nowon'>Nowon</option>
+                    <option value='Yeongdeungpo
+                    '>Yeongdeungpo
+                </option>
+                  </select>
+
+                <!-- <input type="text" class="form" id = "District" aria-describedby="basic-addon3"> -->
+            </div>
+            
+
+            <div class="order">
+                <button onclick="get_class()" type="button" class="btn">Search</button>
+            </div>    
+
+        </div> 
+        <!-- info div 닫기 -->
+
+    
+  </div> 
+  <!-- class = "bottom"에 해당하는 div 닫기 -->
+  </header>
+
+  <main>
+      <div class="dance-columns" id="dances-box">
+
+            <section class = "dance">
+
+                <div class="dance__item">
+                    <div class="dance__background"></div>
+                    <div class="dance__text">Scroll Down !</div>
+                  </div>
+            </section>
+
+            <!-- <section class = "dance">
+
+                <div class="dance__item">
+
+                <img class="dance__real__image" src="https://cdn.imweb.me/thumbnail/20181212/5c10b7a6261db.png" alt="Card image cap">
+
+                <div class="dance__real__text">
+                  <a href="http://jerkdemy.com/16" class="dance_real-title">See More</a>
+                  <p class="dance_real-name">Academy_Name : JustJerk </p>
+                  <p class="dance_real-text comment">Class_Names : YEHWAN KIM</p>
+                  <p class="dance_real-day comment"> Day : MON</p>
+                  <p class="dance_real-time comment">Time : 21:00-22:20</p>
+                  <p class="dance_real-district comment">District : Gangnam</p>
+                  <p class="dance_real-contact comment">Contact : PHONE : +82 010 8770 6903</p>
+                </div>
+            </div>
+              </section> -->
+
+              
+              <section class = "video">
+                  
+                  <div class="dance_wrap">
+                      <span class = "dance_text"> BTS "ON" </span>
+                      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/gwMa6gpoE9I" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    
+                </section>
+                
+                <section class = "video">
+                    
+                    <div class="dance_wrap">
+                        <span class = "dance_text">#1 Choregraphy by Creator</span>
+                        <iframe class = "dance_me" width="100%" height="100%" src="https://www.youtube.com/embed/9vDyFJQPKiA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                     
+                </section>
+
+            <section class = "video">
+                
+                <div class="dance_wrap">
+                    <span class = "dance_text">#2 Choregraphy by Creator</span>
+                    <iframe class = "dance_me" width="100%" height="100%" src="https://www.youtube.com/embed/3vdHx1Be9eo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                 
+            </section>
+            <section class = "video">
+                
+                <div class="dance_wrap">
+                    <span class = "dance_text">#3 Choregraphy by Creator</span>
+                    <iframe class = "dance_me" width="100%" height="100%" src="https://www.youtube.com/embed/RT_xDz3MAKw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                 
+            </section>
+            <section class = "video">
+                
+                <div class="dance_wrap">
+                    <span class = "dance_text">#4 Choregraphy by Creator</span>
+                    <iframe class = "dance_me" width="100%" height="100%" src="https://www.youtube.com/embed/vZ_Iy93U2MA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                 
+            </section>
+            <section class = "video">
+                
+                <div class="dance_wrap">
+                    <span class = "dance_text">#5 Choregraphy by Creator</span>
+                    <iframe class = "dance_me" width="100%" height="100%" src="https://www.youtube.com/embed/DbosjSlczc8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                 
+            </section>
+
+        
+        </div>
+  </main>
+
+</body>
+</html>

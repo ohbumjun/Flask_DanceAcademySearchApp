@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+    <head>  
+        <meta charset="UTF-8">
+        <title>Search for IMS – tbig</title>
+        <script type="text/javascript">
+            var bDisplay = true;
+            function doDisplay(){
+                var con = document.getElementById("sOpts");
+                if(con.style.display == 'none'){
+                    con.style.display = 'block';
+                }
+                else{
+                    con.style.display = 'none';
+                }
+            }
+        </script>
+        <style>
+            #sOptsOrder li,ul {
+                list-style:none;
+                margin: 0 0 0 0;
+                padding: 0 0 0 0;
+            }
+            #sOpts select[multiple]{
+                height:120px;
+            }
+            #sOpts select[multiple]::-webkit-scrollbar{
+                display:none;
+            }
+        </style>
+    </head>
+
+    <body>
+        <main>
+            <header>
+                <div>
+                    <a href="/"><h1>Search for IMS</h1></a>
+                </div>
+            </header>
+
+            <section>
+                <div>
+                        <h2>Search</h2><hr>
+                        <form method="POST">
+                            <p>
+                                <label>Keyword</label>
+                                <input type="text" name="s" value="" placeholder="Type your search term here" maxlength="90%">
+                            </p>
+                            <div id="sOptsOrder">
+                                <li>
+                                    <ul><input type="radio" name="sort" value="accuracy" checked><label>order by score</label></ul>
+                                    <ul><input type="radio" name="sort" value="latest"><label>order by registered date</label></ul>
+                                </li><br>
+                            </div>
+                            <div id="sOpts" style="display:none; -ms-overflow-style:none;">
+                                <label>Product</label>
+                                <select name="product">
+                                    <option value="All">All</option>
+                                    <option value="API Gateway" >API Gateway</option>
+                                    <option value="AnyLink Over Tmax" >AnyLink Over Tmax</option>
+                                    <option value="AnyMiner" >AnyMiner</option>
+                                    <option value="BizMaster" >BizMaster</option>
+                                    <option value="Bridge" >Bridge</option>
+                                    <option value="CDS" >CDS</option>
+                                    <option value="HyperData" >HyperData</option>
+                                    <option value="HyperLoader" >HyperLoader</option>
+                                    <option value="InfiniCache" >InfiniCache</option>
+                                    <option value="InfiniLink" >InfiniLink</option>
+                                    <option value="JEUS" >JEUS</option>
+                                    <option value="OpenFrame" >OpenFrame</option>
+                                    <option value="ProBus" >ProBus</option>
+                                    <option value="ProCMS" >ProCMS</option>
+                                    <option value="ProFrame C" >ProFrame C</option>
+                                    <option value="ProFrame Java" >ProFrame Java</option>
+                                    <option value="ProGroup" >ProGroup</option>
+                                    <option value="ProObject 7 Framework" >ProObject 7 Framework</option>
+                                    <option value="ProObject 7 Runtime" >ProObject 7 Runtime</option>
+                                    <option value="ProPaaS" >ProPaaS</option>
+                                    <option value="ProSync" >ProSync</option>
+                                    <option value="ProVDI" >ProVDI</option>
+                                    <option value="ProZone" >ProZone</option>
+                                    <option value="SysMaster" >SysMaster</option>
+                                    <option value="TOP" >TOP</option>
+                                    <option value="Tibero" >Tibero</option>
+                                    <option value="Tmax" >Tmax</option>
+                                    <option value="Tmax OS" >Tmax OS</option>
+                                    <option value="Tmax Office" >Tmax Office</option>
+                                    <option value="TmaxRQS" >TmaxRQS</option>
+                                    <option value="TmaxWorkSpace" >TmaxWorkSpace</option>
+                                    <option value="ToGate" >ToGate</option>
+                                    <option value="WebtoB" >WebtoB</option>
+                                    <option value="ZetaData" >ZetaData</option>
+                                </select>
+                                <label>Category</label>
+                                <select name="ctgr" multiple>
+                                    <option value="Change Request" selected>Change Request</option>
+                                    <option value="Enhancement Request" selected>Enhancement Request</option>
+                                    <option value="Technical Support" selected>Technical Support</option>
+                                    <option value="Defect" selected>Defect</option>
+                                    <option value="Binary Request">Binary Request</option>
+                                </select>
+                            <input type=submit value=Search>
+                        </div>
+                        <a href="javascript:doDisplay();">검색 옵션</a>
+                    </form>
+
+                </div>
+
+                <aside>
+                    <div>
+                            <aside>
+                                <h4>About</h4>
+                            </aside>
+                    </div>
+                </aside>
+
+            </section>
+
+            <footer>
+                <div></div>
+            </footer>
+
+        </main>
+    </body>
+</html>
