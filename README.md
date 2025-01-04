@@ -20,8 +20,9 @@ availabe in 2020.04
 
 몸치이지만 춤을 배워보고 싶으신 분, 
 손쉽게 자기가 원하는 댄스 수업을 찾고 싶으신 분들을 위한 플랫폼입니다. 
-
 장르, 시간, 요일, 지역구 를 검색하면, 해당 클래스 목록이 뜹니다.
+(A platform for those who want to learn dance, even if they feel they have no rhythm, and for anyone looking to easily find their ideal dance classes.
+Simply search by genre, time, day of the week, or location, and you'll get a list of available classes!)
 
 ## Product Description
 
